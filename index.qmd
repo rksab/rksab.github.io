@@ -2,6 +2,4 @@
 title: "Raman"
 ---
 
-This is a Quarto website.
-
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+Hi! My name is Raman and this is my webpage. 
