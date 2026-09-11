@@ -1,8 +1,3 @@
----
-title: "Raman"
-about:
-    template: trestles
-    image: images/UBC.jpg
----
+![](images/UBC.jpg){width=200}
 
-Hi! My name is Raman and this is my webpage. 
+Welcome to my webpage! I am Raman and a MDS student at UBC. 
