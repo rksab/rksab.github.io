@@ -1,5 +1,6 @@
 project:
   type: website
+  output-dir: docs
 
 website:
   title: "Raman"
@@ -7,8 +8,9 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - about.qmd
-      - href: Blog.qmd
+      - href: about.qmd
+        text: About
+      - href: blog.qmd
         text: Blog
 
 format:
