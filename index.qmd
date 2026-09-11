@@ -1,5 +1,8 @@
 ---
 title: "Raman"
+about:
+    template: trestles
+    image: images/UBC.jpg
 ---
 
 Hi! My name is Raman and this is my webpage. 
