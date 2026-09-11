@@ -2,9 +2,9 @@
   {
     "objectID": "blog.html",
     "href": "blog.html",
-    "title": "Raman",
+    "title": "Blog",
     "section": "",
-    "text": "Hi! My name is Raman."
+    "text": "First week of MDS\n\n\n\n\n\n\n\n\nSep 10, 2026\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "index.html",
@@ -18,6 +18,13 @@
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "About this site"
+    "text": "Hi! My name is Raman and I am a MDS student at UBC. I am from Punjab, India. Previously, I have studied Physics. I love to read, workout and watch art-house movies."
+  },
+  {
+    "objectID": "blog/first-week.html",
+    "href": "blog/first-week.html",
+    "title": "First week of MDS",
+    "section": "",
+    "text": "Exciting, challenging, and overwhelming - sometimes all three before lunch.\nFiguring out course logistics, labs, exploring the campus and meeting batchmates has been both fun and daunting. There’s a particular kind of low-grade anxiety that comes from suspecting you’ve missed an announcement somewhere.\nCampus is still a puzzle. I’ve walked past the same building twice looking for it more than once.\nThe batchmates have been the best surprise. Everyone arrived from somewhere different - different degrees, different countries, different reasons for being here - and there’s a nice levelling effect in all of us being equally lost in the first week.\nDaunting and fun are apparently not opposites. On to week two."
   }
 ]

@@ -12,6 +12,12 @@ website:
         text: About
       - href: blog.qmd
         text: Blog
+    right: 
+      - icon: github
+        href: https://github.com/rksab
+      - icon: linkedin
+        href: https://www.linkedin.com/in/ramandeep-kaur-274a72384/
+
 
 format:
   html:
