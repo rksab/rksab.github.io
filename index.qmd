@@ -4,8 +4,8 @@ title: "Hi, I'm Raman"
 
 ![](images/UBC.jpg){width=200 fig-alt="UBC campus"}
 
-Welcome to my webpage! I am Raman, a student in the Master of Data Science (MDS)
-program at UBC in Vancouver. I grew up in Punjab, India, and completed my
+Welcome to my webpage! I am Raman, a UBC MDS student. I am in section 02.
+I grew up in Punjab, India, and completed my
 undergraduate degree in Physics at IIT Bombay in 2017.
 
 I'm here to build a solid foundation in data science: statistics, machine
