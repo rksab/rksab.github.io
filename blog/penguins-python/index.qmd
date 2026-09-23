@@ -1,0 +1,66 @@
+---
+title: "Penguin bills in Python"
+description: "How do bill length and depth differ between penguin species? A short look at the Palmer Penguins data in Python."
+date: 2026-09-23
+categories: [Python, data]
+jupyter: python3
+---
+
+Bill measurements are one of the classic ways to tell penguin species apart.
+Here I check how well bill length and depth separate them, using Python.
+
+Data: [Palmer Penguins](https://allisonhorst.github.io/palmerpenguins/),
+Palmer Station Antarctica LTER (CC0 licence). Loaded from the `palmerpenguins`
+Python package.
+
+## Loading and tidying
+
+```{python}
+#| message: false
+#| warning: false
+import matplotlib.pyplot as plt
+from palmerpenguins import load_penguins
+
+penguins = load_penguins()
+bills = penguins.dropna(subset=["bill_length_mm", "bill_depth_mm"])
+
+print(len(penguins), "penguins,", len(bills), "with complete bill measurements")
+```
+
+## Summary by species
+
+```{python}
+bills.groupby("species")[["bill_length_mm", "bill_depth_mm"]].mean().round(1)
+```
+
+Adelie penguins have the shortest bills, Chinstrap the longest, and Gentoo
+bills are noticeably shallower than the other two.
+
+## Bill length versus depth
+
+```{python}
+#| label: fig-bill-scatter
+#| fig-cap: "Bill length versus bill depth, coloured by species."
+fig, ax = plt.subplots(figsize=(6, 4))
+for species, group in bills.groupby("species"):
+    ax.scatter(group["bill_length_mm"], group["bill_depth_mm"],
+               label=species, alpha=0.7)
+ax.set_xlabel("Bill length (mm)")
+ax.set_ylabel("Bill depth (mm)")
+ax.legend(title="Species")
+plt.show()
+```
+
+@fig-bill-scatter shows three fairly distinct clusters. Overall the trend
+between length and depth looks negative, but that is an illusion of pooling:
+within each species the relationship is positive.
+
+```{python}
+bills.groupby("species").apply(
+    lambda g: g["bill_length_mm"].corr(g["bill_depth_mm"]),
+    include_groups=False,
+).round(2)
+```
+
+This is Simpson's paradox in a small, friendly form: the pooled correlation and
+the within-species correlations have opposite signs.

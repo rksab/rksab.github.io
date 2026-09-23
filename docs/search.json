@@ -4,7 +4,70 @@
     "href": "blog.html",
     "title": "Blog",
     "section": "",
-    "text": "First week of MDS\n\n\n\n\n\n\n\n\nSep 10, 2026\n\n\n\n\n\nNo matching items"
+    "text": "First week of MDS\n\n\n\n\n\n\n\n\nSep 10, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nPenguin bills in Python\n\n\nHow do bill length and depth differ between penguin species? A short look at the Palmer Penguins data in Python.\n\n\n\n\n\nSep 23, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nPenguin body mass in R\n\n\nDo heavier penguins have longer flippers? A short look at the Palmer Penguins data in R.\n\n\n\n\n\nSep 23, 2026\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "blog/penguins-python/index.html",
+    "href": "blog/penguins-python/index.html",
+    "title": "Penguin bills in Python",
+    "section": "",
+    "text": "Bill measurements are one of the classic ways to tell penguin species apart. Here I check how well bill length and depth separate them, using Python.\nData: Palmer Penguins, Palmer Station Antarctica LTER (CC0 licence). Loaded from the palmerpenguins Python package."
+  },
+  {
+    "objectID": "blog/penguins-python/index.html#loading-and-tidying",
+    "href": "blog/penguins-python/index.html#loading-and-tidying",
+    "title": "Penguin bills in Python",
+    "section": "Loading and tidying",
+    "text": "Loading and tidying\n\nimport matplotlib.pyplot as plt\nfrom palmerpenguins import load_penguins\n\npenguins = load_penguins()\nbills = penguins.dropna(subset=[\"bill_length_mm\", \"bill_depth_mm\"])\n\nprint(len(penguins), \"penguins,\", len(bills), \"with complete bill measurements\")\n\n344 penguins, 342 with complete bill measurements"
+  },
+  {
+    "objectID": "blog/penguins-python/index.html#summary-by-species",
+    "href": "blog/penguins-python/index.html#summary-by-species",
+    "title": "Penguin bills in Python",
+    "section": "Summary by species",
+    "text": "Summary by species\n\nbills.groupby(\"species\")[[\"bill_length_mm\", \"bill_depth_mm\"]].mean().round(1)\n\n\n\n\n\n\n\n\nbill_length_mm\nbill_depth_mm\n\n\nspecies\n\n\n\n\n\n\nAdelie\n38.8\n18.3\n\n\nChinstrap\n48.8\n18.4\n\n\nGentoo\n47.5\n15.0\n\n\n\n\n\n\n\nAdelie penguins have the shortest bills, Chinstrap the longest, and Gentoo bills are noticeably shallower than the other two."
+  },
+  {
+    "objectID": "blog/penguins-python/index.html#bill-length-versus-depth",
+    "href": "blog/penguins-python/index.html#bill-length-versus-depth",
+    "title": "Penguin bills in Python",
+    "section": "Bill length versus depth",
+    "text": "Bill length versus depth\n\nfig, ax = plt.subplots(figsize=(6, 4))\nfor species, group in bills.groupby(\"species\"):\n    ax.scatter(group[\"bill_length_mm\"], group[\"bill_depth_mm\"],\n               label=species, alpha=0.7)\nax.set_xlabel(\"Bill length (mm)\")\nax.set_ylabel(\"Bill depth (mm)\")\nax.legend(title=\"Species\")\nplt.show()\n\n\n\n\n\n\n\nFigure 1: Bill length versus bill depth, coloured by species.\n\n\n\n\n\nFigure 1 shows three fairly distinct clusters. Overall the trend between length and depth looks negative, but that is an illusion of pooling: within each species the relationship is positive.\n\nbills.groupby(\"species\").apply(\n    lambda g: g[\"bill_length_mm\"].corr(g[\"bill_depth_mm\"]),\n    include_groups=False,\n).round(2)\n\nspecies\nAdelie       0.39\nChinstrap    0.65\nGentoo       0.64\ndtype: float64\n\n\nThis is Simpson’s paradox in a small, friendly form: the pooled correlation and the within-species correlations have opposite signs."
+  },
+  {
+    "objectID": "blog/penguins-r/index.html",
+    "href": "blog/penguins-r/index.html",
+    "title": "Penguin body mass in R",
+    "section": "",
+    "text": "Which of the three Palmer penguin species is the heaviest, and does body mass track flipper length? I use R to find out.\nData: Palmer Penguins, Palmer Station Antarctica LTER (CC0 licence). Loaded from the palmerpenguins R package."
+  },
+  {
+    "objectID": "blog/penguins-r/index.html#loading-and-tidying",
+    "href": "blog/penguins-r/index.html#loading-and-tidying",
+    "title": "Penguin body mass in R",
+    "section": "Loading and tidying",
+    "text": "Loading and tidying\n\nlibrary(dplyr)\nlibrary(ggplot2)\nlibrary(palmerpenguins)\n\npenguins_clean &lt;- penguins |&gt;\n  filter(!is.na(body_mass_g), !is.na(flipper_length_mm))\n\nnrow(penguins)\n\n[1] 344\n\nnrow(penguins_clean)\n\n[1] 342\n\n\nRemoving rows with missing mass or flipper length drops a couple of birds, and leaves the rest of the data intact."
+  },
+  {
+    "objectID": "blog/penguins-r/index.html#mass-by-species",
+    "href": "blog/penguins-r/index.html#mass-by-species",
+    "title": "Penguin body mass in R",
+    "section": "Mass by species",
+    "text": "Mass by species\n\npenguins_clean |&gt;\n  group_by(species) |&gt;\n  summarise(\n    n = n(),\n    mean_mass_g = round(mean(body_mass_g)),\n    sd_mass_g = round(sd(body_mass_g))\n  )\n\n# A tibble: 3 x 4\n  species       n mean_mass_g sd_mass_g\n  &lt;fct&gt;     &lt;int&gt;       &lt;dbl&gt;     &lt;dbl&gt;\n1 Adelie      151        3701       459\n2 Chinstrap    68        3733       384\n3 Gentoo      123        5076       504\n\n\nGentoo penguins are clearly the heaviest, about 1.4 kg more than Adelie or Chinstrap on average. Adelie and Chinstrap are close to each other.\n\nggplot(penguins_clean, aes(x = species, y = body_mass_g, fill = species)) +\n  geom_boxplot(show.legend = FALSE) +\n  labs(x = \"Species\", y = \"Body mass (g)\") +\n  theme_minimal()\n\n\n\n\n\n\n\nFigure 1: Body mass of penguins by species.\n\n\n\n\n\nFigure 1 shows the same story: the Gentoo box sits well above the other two with barely any overlap."
+  },
+  {
+    "objectID": "blog/penguins-r/index.html#mass-versus-flipper-length",
+    "href": "blog/penguins-r/index.html#mass-versus-flipper-length",
+    "title": "Penguin body mass in R",
+    "section": "Mass versus flipper length",
+    "text": "Mass versus flipper length\n\ncor(penguins_clean$body_mass_g, penguins_clean$flipper_length_mm)\n\n[1] 0.8712018\n\n\nThe correlation is strongly positive, so heavier penguins do tend to have longer flippers. This is a quick look and not a model, but it matches what the box plot suggested: much of the difference is between species, and Gentoo is simply a bigger bird."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Hi, I’m Raman",
+    "section": "",
+    "text": "Welcome to my webpage! I am Raman, a UBC MDS student. I am in section 02. I grew up in Punjab, India, and completed my undergraduate degree in Physics at IIT Bombay in 2017.\nI’m here to build a solid foundation in data science: statistics, machine learning and the programming skills that go with them. This site is where I’ll share a bit about myself and write about what I’m learning along the way.\nOutside of class, I love to cook, work out, read, and play spelling bee and other word games.\n\nRead more about me\nFollow my progress on the blog"
   },
   {
     "objectID": "blog/first-week.html",
@@ -12,13 +75,6 @@
     "title": "First week of MDS",
     "section": "",
     "text": "Exciting, challenging, and overwhelming - sometimes all three before lunch.\n\n\n\nThe UBC campus, where I’ve been getting lost all week.\n\n\nFiguring out course logistics, labs, exploring the campus and meeting batchmates has been both fun and daunting. There’s a particular kind of low-grade anxiety that comes from suspecting you’ve missed an announcement somewhere.\nCampus is still a puzzle. I’ve walked past the same building twice looking for it more than once.\nThe batchmates have been the best surprise. Everyone arrived from somewhere different - different degrees, different countries, different reasons for being here - and there’s a nice levelling effect in all of us being equally lost in the first week.\nDaunting and fun are apparently not opposites. On to week two."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Hi, I’m Raman",
-    "section": "",
-    "text": "Welcome to my webpage! I am Raman, a student in the Master of Data Science (MDS) program at UBC in Vancouver. I grew up in Punjab, India, and completed my undergraduate degree in Physics at IIT Bombay in 2017.\nI’m here to build a solid foundation in data science: statistics, machine learning and the programming skills that go with them. This site is where I’ll share a bit about myself and write about what I’m learning along the way.\nOutside of class, I love to cook, work out, read, and play spelling bee and other word games.\n\nRead more about me\nFollow my progress on the blog"
   },
   {
     "objectID": "about.html",

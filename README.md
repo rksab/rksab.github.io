@@ -1,9 +1,64 @@
 # RamanK.github.io
 
-Milestone 2. Starting off with a blog.
+Personal website and blog for Raman, a UBC Master of Data Science student, built
+with [Quarto](https://quarto.org). The blog has two computational posts on the
+Palmer Penguins data: one in R (`blog/penguins-r/`) and one in Python
+(`blog/penguins-python/`).
 
-**To get started:**
+The site is published at <https://rksab.github.io/>.
 
-1. git clone git@github.com:rksab/RamanK.github.io.git
-2. cd RamanK.github.io
-3. quarto preview for localhost and quarto render for the output.
+## What to install first
+
+Versions used to build this site:
+
+- [Quarto](https://quarto.org/docs/get-started/) 1.10.18
+- [uv](https://docs.astral.sh/uv/) 0.12.9 (it installs Python 3.14 itself, as pinned in `.python-version`)
+- [R](https://cran.r-project.org/) 4.6.1 (`renv` bootstraps itself on first launch)
+
+## Build the site
+
+Run everything from the top level of the repository.
+
+In a shell:
+
+```bash
+git clone git@github.com:rksab/rksab.github.io.git
+cd rksab.github.io
+uv sync
+```
+
+In R, started from the top level of the repository (so `.Rprofile` turns `renv` on):
+
+```r
+renv::restore()
+```
+
+Back in the shell:
+
+```bash
+uv run quarto render
+```
+
+Quarto renders the site into `docs/`. The Python post runs through the `uv`
+environment, and the R post picks up the `renv` library.
+
+To preview it locally, run `uv run quarto preview`, or open
+`docs/index.html` in a browser after rendering.
+
+## Environments
+
+| Language | Files                                          | Tool |
+|----------|------------------------------------------------|------|
+| Python   | `pyproject.toml`, `uv.lock`, `.python-version` | uv   |
+| R        | `renv.lock`, `.Rprofile`, `renv/activate.R`    | renv |
+
+After adding a package, use `uv add` (Python) or
+`renv::install()` then `renv::snapshot()` (R), and commit the updated lockfile.
+
+## Data
+
+Both posts use the Palmer Penguins data
+([Horst, Hill and Gorman](https://allisonhorst.github.io/palmerpenguins/), Palmer
+Station Antarctica LTER, CC0 licence). It ships inside the `palmerpenguins`
+R and Python packages, so building the site needs no network access to fetch
+data. Installing the packages does need the network.

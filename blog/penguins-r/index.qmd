@@ -1,0 +1,70 @@
+---
+title: "Penguin body mass in R"
+description: "Do heavier penguins have longer flippers? A short look at the Palmer Penguins data in R."
+date: 2026-09-23
+categories: [R, data]
+---
+
+Which of the three Palmer penguin species is the heaviest, and does body mass
+track flipper length? I use R to find out.
+
+Data: [Palmer Penguins](https://allisonhorst.github.io/palmerpenguins/),
+Palmer Station Antarctica LTER (CC0 licence). Loaded from the `palmerpenguins`
+R package.
+
+## Loading and tidying
+
+```{r}
+#| message: false
+#| warning: false
+library(dplyr)
+library(ggplot2)
+library(palmerpenguins)
+
+penguins_clean <- penguins |>
+  filter(!is.na(body_mass_g), !is.na(flipper_length_mm))
+
+nrow(penguins)
+nrow(penguins_clean)
+```
+
+Removing rows with missing mass or flipper length drops a couple of birds, and
+leaves the rest of the data intact.
+
+## Mass by species
+
+```{r}
+penguins_clean |>
+  group_by(species) |>
+  summarise(
+    n = n(),
+    mean_mass_g = round(mean(body_mass_g)),
+    sd_mass_g = round(sd(body_mass_g))
+  )
+```
+
+Gentoo penguins are clearly the heaviest, about 1.4 kg more than Adelie or
+Chinstrap on average. Adelie and Chinstrap are close to each other.
+
+```{r}
+#| label: fig-penguin-mass
+#| fig-cap: "Body mass of penguins by species."
+ggplot(penguins_clean, aes(x = species, y = body_mass_g, fill = species)) +
+  geom_boxplot(show.legend = FALSE) +
+  labs(x = "Species", y = "Body mass (g)") +
+  theme_minimal()
+```
+
+@fig-penguin-mass shows the same story: the Gentoo box sits well above the
+other two with barely any overlap.
+
+## Mass versus flipper length
+
+```{r}
+cor(penguins_clean$body_mass_g, penguins_clean$flipper_length_mm)
+```
+
+The correlation is strongly positive, so heavier penguins do tend to have
+longer flippers. This is a quick look and not a model, but it matches what the
+box plot suggested: much of the difference is between species, and Gentoo is
+simply a bigger bird.
