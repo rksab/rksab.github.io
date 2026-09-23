@@ -5,6 +5,8 @@ date: 2026-09-10
 
 Exciting, challenging, and overwhelming - sometimes all three before lunch.
 
+![The UBC campus, where I've been getting lost all week.](../images/UBC.jpg){fig-alt="UBC campus"}
+
 Figuring out course logistics, labs, exploring the campus and meeting batchmates has been both fun and daunting.
 There's a particular kind of low-grade anxiety that comes from
 suspecting you've missed an announcement somewhere.

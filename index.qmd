@@ -1,4 +1,19 @@
-![](images/UBC.jpg){width=200}
+---
+title: "Hi, I'm Raman"
+---
 
-Welcome to my webpage! I am Raman and a MDS student at UBC. I love to cook, workout, read 
-and enjoy spelling bee and word games. I finished my undergrad in Physics from IITB in 2017. 
+![](images/UBC.jpg){width=200 fig-alt="UBC campus"}
+
+Welcome to my webpage! I am Raman, a student in the Master of Data Science (MDS)
+program at UBC in Vancouver. I grew up in Punjab, India, and completed my
+undergraduate degree in Physics at IIT Bombay in 2017.
+
+I'm here to build a solid foundation in data science: statistics, machine
+learning and the programming skills that go with them. This site is where I'll
+share a bit about myself and write about what I'm learning along the way.
+
+Outside of class, I love to cook, work out, read, and play spelling bee and
+other word games.
+
+- Read more [about me](about.qmd)
+- Follow my progress on the [blog](blog.qmd)

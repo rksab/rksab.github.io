@@ -5,5 +5,24 @@ about:
     image: images/UBC.jpg
 ---
 
- I am from Punjab, India. Previously, I have studied Physics. I love to read, workout and watch art-house movies. 
- I miss my dog Peanut. Excited to be here and meet new people and learn a ton. 
+## Where I'm from
+
+I am from Punjab, India. I grew up there and later moved to Mumbai for my
+undergraduate studies, before coming to Vancouver for the MDS program at UBC.
+
+## Before MDS
+
+I studied Physics at IIT Bombay and graduated in 2017. Physics taught me to
+think carefully about data, models and uncertainty, which is what drew me toward
+data science in the first place.
+
+## What I enjoy
+
+I love to read, work out, cook and watch art-house movies. I also enjoy spelling
+bee and other word games. I miss my dog Peanut a lot.
+
+## What's next
+
+I'm excited to be here, meet new people and learn a ton. By the end of the
+program I hope to apply data science to real-world problems, ideally in a role
+where I can keep learning from the people around me.

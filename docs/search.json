@@ -11,20 +11,48 @@
     "href": "blog/first-week.html",
     "title": "First week of MDS",
     "section": "",
-    "text": "Exciting, challenging, and overwhelming - sometimes all three before lunch.\nFiguring out course logistics, labs, exploring the campus and meeting batchmates has been both fun and daunting. There’s a particular kind of low-grade anxiety that comes from suspecting you’ve missed an announcement somewhere.\nCampus is still a puzzle. I’ve walked past the same building twice looking for it more than once.\nThe batchmates have been the best surprise. Everyone arrived from somewhere different - different degrees, different countries, different reasons for being here - and there’s a nice levelling effect in all of us being equally lost in the first week.\nDaunting and fun are apparently not opposites. On to week two."
+    "text": "Exciting, challenging, and overwhelming - sometimes all three before lunch.\n\n\n\nThe UBC campus, where I’ve been getting lost all week.\n\n\nFiguring out course logistics, labs, exploring the campus and meeting batchmates has been both fun and daunting. There’s a particular kind of low-grade anxiety that comes from suspecting you’ve missed an announcement somewhere.\nCampus is still a puzzle. I’ve walked past the same building twice looking for it more than once.\nThe batchmates have been the best surprise. Everyone arrived from somewhere different - different degrees, different countries, different reasons for being here - and there’s a nice levelling effect in all of us being equally lost in the first week.\nDaunting and fun are apparently not opposites. On to week two."
   },
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Raman",
+    "title": "Hi, I’m Raman",
     "section": "",
-    "text": "Welcome to my webpage! I am Raman and a MDS student at UBC."
+    "text": "Welcome to my webpage! I am Raman, a student in the Master of Data Science (MDS) program at UBC in Vancouver. I grew up in Punjab, India, and completed my undergraduate degree in Physics at IIT Bombay in 2017.\nI’m here to build a solid foundation in data science: statistics, machine learning and the programming skills that go with them. This site is where I’ll share a bit about myself and write about what I’m learning along the way.\nOutside of class, I love to cook, work out, read, and play spelling bee and other word games.\n\nRead more about me\nFollow my progress on the blog"
   },
   {
     "objectID": "about.html",
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "I am from Punjab, India. Previously, I have studied Physics. I love to read, workout and watch art-house movies. I miss my dog Peanut. Excited to be here and meet new people and learn a ton."
+    "text": "I am from Punjab, India. I grew up there and later moved to Mumbai for my undergraduate studies, before coming to Vancouver for the MDS program at UBC."
+  },
+  {
+    "objectID": "about.html#where-im-from",
+    "href": "about.html#where-im-from",
+    "title": "About",
+    "section": "",
+    "text": "I am from Punjab, India. I grew up there and later moved to Mumbai for my undergraduate studies, before coming to Vancouver for the MDS program at UBC."
+  },
+  {
+    "objectID": "about.html#before-mds",
+    "href": "about.html#before-mds",
+    "title": "About",
+    "section": "Before MDS",
+    "text": "Before MDS\nI studied Physics at IIT Bombay and graduated in 2017. Physics taught me to think carefully about data, models and uncertainty, which is what drew me toward data science in the first place."
+  },
+  {
+    "objectID": "about.html#what-i-enjoy",
+    "href": "about.html#what-i-enjoy",
+    "title": "About",
+    "section": "What I enjoy",
+    "text": "What I enjoy\nI love to read, work out, cook and watch art-house movies. I also enjoy spelling bee and other word games. I miss my dog Peanut a lot."
+  },
+  {
+    "objectID": "about.html#whats-next",
+    "href": "about.html#whats-next",
+    "title": "About",
+    "section": "What’s next",
+    "text": "What’s next\nI’m excited to be here, meet new people and learn a ton. By the end of the program I hope to apply data science to real-world problems, ideally in a role where I can keep learning from the people around me."
   }
 ]
