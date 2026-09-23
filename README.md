@@ -3,7 +3,8 @@
 Personal website and blog for Raman, a UBC Master of Data Science student, built
 with [Quarto](https://quarto.org). The blog has two computational posts on the
 Palmer Penguins data: one in R (`blog/penguins-r/`) and one in Python
-(`blog/penguins-python/`).
+(`blog/penguins-python/`). A third post (`blog/r-and-python/`) runs R and
+Python in one document and passes objects between them with `reticulate`.
 
 The site is published at <https://rksab.github.io/>.
 
@@ -40,7 +41,9 @@ uv run quarto render
 ```
 
 Quarto renders the site into `docs/`. The Python post runs through the `uv`
-environment, and the R post picks up the `renv` library.
+environment, and the R post picks up the `renv` library. The R-and-Python post
+uses both: `reticulate` finds the Python in `.venv` (created by `uv sync`), so
+run `uv sync` before rendering.
 
 To preview it locally, run `uv run quarto preview`, or open
 `docs/index.html` in a browser after rendering.

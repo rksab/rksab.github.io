@@ -4,7 +4,7 @@
     "href": "blog.html",
     "title": "Blog",
     "section": "",
-    "text": "First week of MDS\n\n\n\n\n\n\n\n\nSep 10, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nPenguin bills in Python\n\n\nHow do bill length and depth differ between penguin species? A short look at the Palmer Penguins data in Python.\n\n\n\n\n\nSep 23, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nPenguin body mass in R\n\n\nDo heavier penguins have longer flippers? A short look at the Palmer Penguins data in R.\n\n\n\n\n\nSep 23, 2026\n\n\n\n\n\nNo matching items"
+    "text": "First week of MDS\n\n\n\n\n\n\n\n\nSep 10, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nPenguin bills in Python\n\n\nHow do bill length and depth differ between penguin species? A short look at the Palmer Penguins data in Python.\n\n\n\n\n\nSep 23, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nPenguin body mass in R\n\n\nDo heavier penguins have longer flippers? A short look at the Palmer Penguins data in R.\n\n\n\n\n\nSep 23, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nR and Python in one post\n\n\nCleaning penguin data in R, summarising it in Python, and plotting the result back in R, all in one Quarto document.\n\n\n\n\n\nSep 23, 2026\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "blog/penguins-python/index.html",
@@ -35,6 +35,48 @@
     "text": "Bill length versus depth\n\nfig, ax = plt.subplots(figsize=(6, 4))\nfor species, group in bills.groupby(\"species\"):\n    ax.scatter(group[\"bill_length_mm\"], group[\"bill_depth_mm\"],\n               label=species, alpha=0.7)\nax.set_xlabel(\"Bill length (mm)\")\nax.set_ylabel(\"Bill depth (mm)\")\nax.legend(title=\"Species\")\nplt.show()\n\n\n\n\n\n\n\nFigure 1: Bill length versus bill depth, coloured by species.\n\n\n\n\n\nFigure 1 shows three fairly distinct clusters. Overall the trend between length and depth looks negative, but that is an illusion of pooling: within each species the relationship is positive.\n\nbills.groupby(\"species\").apply(\n    lambda g: g[\"bill_length_mm\"].corr(g[\"bill_depth_mm\"]),\n    include_groups=False,\n).round(2)\n\nspecies\nAdelie       0.39\nChinstrap    0.65\nGentoo       0.64\ndtype: float64\n\n\nThis is Simpson’s paradox in a small, friendly form: the pooled correlation and the within-species correlations have opposite signs."
   },
   {
+    "objectID": "blog/r-and-python/index.html",
+    "href": "blog/r-and-python/index.html",
+    "title": "R and Python in one post",
+    "section": "",
+    "text": "R and Python are often treated as rivals, but they can share one document. Here I use each for the part it does comfortably: R to load and tidy the Palmer Penguins data, Python (pandas) to summarise it, and R again to plot the result. The reticulate package hands the objects back and forth.\nData: Palmer Penguins, Palmer Station Antarctica LTER (CC0 licence). Loaded from the palmerpenguins R package."
+  },
+  {
+    "objectID": "blog/r-and-python/index.html#pointing-r-at-the-python-environment",
+    "href": "blog/r-and-python/index.html#pointing-r-at-the-python-environment",
+    "title": "R and Python in one post",
+    "section": "Pointing R at the Python environment",
+    "text": "Pointing R at the Python environment\nreticulate needs to know which Python to use. I point it at the uv environment in .venv, so the post uses the same packages as the Python post.\n\nlibrary(reticulate)\n\nvenv_python &lt;- file.path(Sys.getenv(\"QUARTO_PROJECT_DIR\", \".\"), \".venv\", \"bin\", \"python\")\nif (file.exists(venv_python)) use_python(venv_python, required = TRUE)\n\npy_config()$version\n\n[1] '3.14'"
+  },
+  {
+    "objectID": "blog/r-and-python/index.html#r-load-and-tidy",
+    "href": "blog/r-and-python/index.html#r-load-and-tidy",
+    "title": "R and Python in one post",
+    "section": "R: load and tidy",
+    "text": "R: load and tidy\n\nlibrary(dplyr)\nlibrary(palmerpenguins)\n\npenguins_clean &lt;- penguins |&gt;\n  filter(!is.na(body_mass_g), !is.na(flipper_length_mm))\n\ndim(penguins_clean)\n\n[1] 342   8"
+  },
+  {
+    "objectID": "blog/r-and-python/index.html#python-summarise",
+    "href": "blog/r-and-python/index.html#python-summarise",
+    "title": "R and Python in one post",
+    "section": "Python: summarise",
+    "text": "Python: summarise\nIn a Python chunk, the R object is available as r.penguins_clean, and reticulate has already converted it to a pandas DataFrame.\n\nimport pandas as pd\n\ndf = r.penguins_clean\nprint(type(df))\n\n&lt;class 'pandas.DataFrame'&gt;\n\nsummary = (\n    df.groupby(\"species\", observed=True)\n    .agg(n=(\"body_mass_g\", \"size\"),\n         mean_mass_g=(\"body_mass_g\", \"mean\"),\n         mean_flipper_mm=(\"flipper_length_mm\", \"mean\"))\n    .round(1)\n    .reset_index()\n)\nsummary\n\n     species    n  mean_mass_g  mean_flipper_mm\n0     Adelie  151       3700.7            190.0\n1  Chinstrap   68       3733.1            195.8\n2     Gentoo  123       5076.0            217.2"
+  },
+  {
+    "objectID": "blog/r-and-python/index.html#r-plot-what-python-made",
+    "href": "blog/r-and-python/index.html#r-plot-what-python-made",
+    "title": "R and Python in one post",
+    "section": "R: plot what Python made",
+    "text": "R: plot what Python made\nBack in R, the Python object is py$summary, which arrives as an ordinary data frame.\n\nlibrary(ggplot2)\n\nggplot(py$summary, aes(x = species, y = mean_mass_g, fill = species)) +\n  geom_col(show.legend = FALSE) +\n  labs(x = \"Species\", y = \"Mean body mass (g)\") +\n  theme_minimal()\n\n\n\n\n\n\n\nFigure 1: Mean body mass by species, computed in Python and plotted in R.\n\n\n\n\n\nFigure 1 crosses the language boundary twice: the data went from R to Python, and the summary came back to R for plotting. Gentoo are again the heaviest species by a wide margin.\n\n# A deliberate warning, left visible on purpose: as.integer() on a species name\nas.integer(as.character(py$summary$species[1]))\n\nWarning: NAs introduced by coercion\n\n\n[1] NA\n\n\nThat warning is expected. It is a reminder that values passed between the languages keep their types, so a text column will not quietly become a number."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Hi, I’m Raman",
+    "section": "",
+    "text": "Welcome to my webpage! I am Raman, a UBC MDS student. I am in section 02. I grew up in Punjab, India, and completed my undergraduate degree in Physics at IIT Bombay in 2017.\nI’m here to build a solid foundation in data science: statistics, machine learning and the programming skills that go with them. This site is where I’ll share a bit about myself and write about what I’m learning along the way.\nOutside of class, I love to cook, work out, read, and play spelling bee and other word games. That’s my dog Peanut!\n\nRead more about me\nFollow my progress on the blog"
+  },
+  {
     "objectID": "blog/penguins-r/index.html",
     "href": "blog/penguins-r/index.html",
     "title": "Penguin body mass in R",
@@ -61,13 +103,6 @@
     "title": "Penguin body mass in R",
     "section": "Mass versus flipper length",
     "text": "Mass versus flipper length\n\ncor(penguins_clean$body_mass_g, penguins_clean$flipper_length_mm)\n\n[1] 0.8712018\n\n\nThe correlation is strongly positive, so heavier penguins do tend to have longer flippers. This is a quick look and not a model, but it matches what the box plot suggested: much of the difference is between species, and Gentoo is simply a bigger bird."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Hi, I’m Raman",
-    "section": "",
-    "text": "Welcome to my webpage! I am Raman, a UBC MDS student. I am in section 02. I grew up in Punjab, India, and completed my undergraduate degree in Physics at IIT Bombay in 2017.\nI’m here to build a solid foundation in data science: statistics, machine learning and the programming skills that go with them. This site is where I’ll share a bit about myself and write about what I’m learning along the way.\nOutside of class, I love to cook, work out, read, and play spelling bee and other word games. That’s my dog Peanut!\n\nRead more about me\nFollow my progress on the blog"
   },
   {
     "objectID": "blog/first-week.html",

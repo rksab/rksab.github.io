@@ -222,7 +222,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Data: <a href="https://allisonhorst.github.io/palmerpenguins/">Palmer Penguins</a>, Palmer Station Antarctica LTER (CC0 licence). Loaded from the <code>palmerpenguins</code> Python package.</p>
 <section id="loading-and-tidying" class="level2">
 <h2 class="anchored" data-anchor-id="loading-and-tidying">Loading and tidying</h2>
-<div id="12476ecb" class="cell" data-message="false" data-execution_count="1">
+<div id="eb398070" class="cell" data-message="false" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> palmerpenguins <span class="im">import</span> load_penguins</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -237,7 +237,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="summary-by-species" class="level2">
 <h2 class="anchored" data-anchor-id="summary-by-species">Summary by species</h2>
-<div id="e353d28c" class="cell" data-execution_count="2">
+<div id="fa058c48" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>bills.groupby(<span class="st">"species"</span>)[[<span class="st">"bill_length_mm"</span>, <span class="st">"bill_depth_mm"</span>]].mean().<span class="bu">round</span>(<span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="2">
 <div>
@@ -305,7 +305,7 @@ Figure&nbsp;1: Bill length versus bill depth, coloured by species.
 </div>
 </div>
 <p><a href="#fig-bill-scatter" class="quarto-xref">Figure&nbsp;1</a> shows three fairly distinct clusters. Overall the trend between length and depth looks negative, but that is an illusion of pooling: within each species the relationship is positive.</p>
-<div id="1ec56306" class="cell" data-execution_count="4">
+<div id="c719309b" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>bills.groupby(<span class="st">"species"</span>).<span class="bu">apply</span>(</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">lambda</span> g: g[<span class="st">"bill_length_mm"</span>].corr(g[<span class="st">"bill_depth_mm"</span>]),</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    include_groups<span class="op">=</span><span class="va">False</span>,</span>

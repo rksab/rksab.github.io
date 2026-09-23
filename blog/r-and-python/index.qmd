@@ -1,0 +1,99 @@
+---
+title: "R and Python in one post"
+description: "Cleaning penguin data in R, summarising it in Python, and plotting the result back in R, all in one Quarto document."
+date: 2026-09-23
+categories: [R, Python, data]
+engine: knitr
+---
+
+R and Python are often treated as rivals, but they can share one document.
+Here I use each for the part it does comfortably: R to load and tidy the
+Palmer Penguins data, Python (`pandas`) to summarise it, and R again to plot
+the result. The [`reticulate`](https://rstudio.github.io/reticulate/) package
+hands the objects back and forth.
+
+Data: [Palmer Penguins](https://allisonhorst.github.io/palmerpenguins/),
+Palmer Station Antarctica LTER (CC0 licence). Loaded from the `palmerpenguins`
+R package.
+
+## Pointing R at the Python environment
+
+`reticulate` needs to know which Python to use. I point it at the `uv`
+environment in `.venv`, so the post uses the same packages as the Python post.
+
+```{r}
+#| label: setup
+library(reticulate)
+
+venv_python <- file.path(Sys.getenv("QUARTO_PROJECT_DIR", "."), ".venv", "bin", "python")
+if (file.exists(venv_python)) use_python(venv_python, required = TRUE)
+
+py_config()$version
+```
+
+## R: load and tidy
+
+```{r}
+#| label: r-tidy
+#| message: false
+library(dplyr)
+library(palmerpenguins)
+
+penguins_clean <- penguins |>
+  filter(!is.na(body_mass_g), !is.na(flipper_length_mm))
+
+dim(penguins_clean)
+```
+
+## Python: summarise
+
+In a Python chunk, the R object is available as `r.penguins_clean`, and
+`reticulate` has already converted it to a `pandas` DataFrame.
+
+```{python}
+#| label: py-summary
+import pandas as pd
+
+df = r.penguins_clean
+print(type(df))
+
+summary = (
+    df.groupby("species", observed=True)
+    .agg(n=("body_mass_g", "size"),
+         mean_mass_g=("body_mass_g", "mean"),
+         mean_flipper_mm=("flipper_length_mm", "mean"))
+    .round(1)
+    .reset_index()
+)
+summary
+```
+
+## R: plot what Python made
+
+Back in R, the Python object is `py$summary`, which arrives as an ordinary
+data frame.
+
+```{r}
+#| label: fig-summary
+#| fig-cap: "Mean body mass by species, computed in Python and plotted in R."
+library(ggplot2)
+
+ggplot(py$summary, aes(x = species, y = mean_mass_g, fill = species)) +
+  geom_col(show.legend = FALSE) +
+  labs(x = "Species", y = "Mean body mass (g)") +
+  theme_minimal()
+```
+
+@fig-summary crosses the language boundary twice: the data went from R to
+Python, and the summary came back to R for plotting. Gentoo are again the
+heaviest species by a wide margin.
+
+```{r}
+#| label: warn-demo
+#| warning: true
+# A deliberate warning, left visible on purpose: as.integer() on a species name
+as.integer(as.character(py$summary$species[1]))
+```
+
+That warning is expected. It is a reminder that values passed between the
+languages keep their types, so a text column will not quietly become a number.
