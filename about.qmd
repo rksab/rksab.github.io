@@ -2,6 +2,7 @@
 title: "About"
 about:
     template: trestles
+    image: images/Peanut.jpg
 ---
 
 ## Where I'm from
