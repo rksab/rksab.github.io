@@ -13,7 +13,7 @@ learning and the programming skills that go with them. This site is where I'll
 share a bit about myself and write about what I'm learning along the way.
 
 Outside of class, I love to cook, work out, read, and play spelling bee and
-other word games.
+other word games. That's my dog Peanut!
 
 - Read more [about me](about.qmd)
 - Follow my progress on the [blog](blog.qmd)
